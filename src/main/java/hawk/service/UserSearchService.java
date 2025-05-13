@@ -26,7 +26,7 @@ public class UserSearchService {
         final Session session = entityManager.unwrap(Session.class);
         return session.doReturningWork(connection -> {
             List<User> users1 = new ArrayList<>();
-            /*// The wrong way
+            // The wrong way
             String query = "select id, name, description, tenant_id from public.user where name like '%" +
                     search.getSearchText() + "%'";
 
@@ -34,13 +34,12 @@ public class UserSearchService {
             ResultSet rs = connection
                     .createStatement()
                     .executeQuery(query);
-            */
-            // The righter way, should probably use built in Data Model for this, but this is safe
+            /*// The righter way, should probably use built in Data Model for this, but this is safe
             String query = "select id, name, description from ITEM where description like ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, "%" + search.getSearchText() + "%");
             LOGGER.log(Level.INFO, "SQL Query {0}",  statement);
-            ResultSet rs = statement.executeQuery();
+            ResultSet rs = statement.executeQuery(); */
 
             while (rs.next()) {
                 users1.add(new User(rs.getLong("id"), rs.getString("name"), rs.getString("description"), rs.getString("tenant_id")));
