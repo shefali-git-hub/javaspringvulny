@@ -47,7 +47,6 @@ public class MultiHttpSecurityConfig {
             http
                     .antMatcher("/api/jwt/**")
                         .httpBasic().disable()
-                        .csrf().disable()
                         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                         .authorizeRequests()
@@ -88,7 +87,6 @@ public class MultiHttpSecurityConfig {
             http
                     .antMatcher("/api/token/**")
                     .httpBasic().disable()
-                    .csrf().disable()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                         .addFilter(filter)
